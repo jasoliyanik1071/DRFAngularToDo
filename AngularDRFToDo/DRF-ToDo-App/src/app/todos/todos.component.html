@@ -1,0 +1,60 @@
+<section class="heading-section">
+    <h1 class="title is-1 has-text-centered ">
+        ToDos
+    </h1>
+</section>
+
+<div class="container add-todo-box-container">
+    
+    <div class="add-todo-box">
+        <form id="todoForm" #form="ngForm" (ngSubmit)="onFormSubmit(form)">
+            <h2 class="title is-6">
+                New ToDo
+            </h2>
+
+            <div class="field is-grouped" style="margin: 0;">
+                <p class="control is-expanded">
+                    <input ngModel class="input" type="text" placeholder="Type todo text here..." name="todo_title" id="todo_title" ng-minlength="5" required minlength="2" #todoTextField="ngModel">
+                </p>
+                <p class="control">
+                    <button type="submit" class="button alt-gradient-button">
+                        <i class="material-icons">add</i>
+                        Add
+                    </button>
+                </p>
+            </div>
+            <div *ngIf="todoTextField.invalid && showValiidationErrors" style="color: red;">
+                <p class="help is-dander" *ngIf="todoTextField.errors.required">
+                    Please enter some text to create ToDo
+                </p>
+                <p class="help is-dander" *ngIf="todoTextField.errors.minlength">
+                    ToDo text must be at least 2 characters
+                </p>
+            </div>
+
+            <div class="field is-grouped" style="margin: 0;">
+                <p class="control is-expanded" style="width: 30%; min-width: 15%; display: flex; max-width: 43%;">
+                    <input ngModel matInput class="input" [min]="minDate" [max]="maxDate" [matDatepicker]="start_date" placeholder="Start Date*" name="start_date" id="start_date" #todoStartDateField="ngModel">
+                    <mat-datepicker-toggle matSuffix [for]="start_date"></mat-datepicker-toggle>
+                    <mat-datepicker #start_date [startAt]="start_date"></mat-datepicker>
+                </p>
+                <p class="control is-expanded" style="width: 30%; min-width: 15%; display: flex; max-width: 43%;">
+                    <input ngModel matInput class="input" [min]="minDate" [max]="maxDate" [matDatepicker]="end_date" placeholder="End Date*" name="end_date" id="end_date" #todoEndDateField="ngModel">
+                    <mat-datepicker-toggle matSuffix [for]="end_date"></mat-datepicker-toggle>
+                    <mat-datepicker #end_date [startAt]="end_date"></mat-datepicker>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
+        <div class="todos-list">
+            <app-todo-item
+                *ngFor="let todo of alltodos"
+                [todo]="todo">
+            </app-todo-item>
+        </div>
+    </div>
+</div>

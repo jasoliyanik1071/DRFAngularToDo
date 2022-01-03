@@ -1,0 +1,27 @@
+<div *ngIf="todo">
+    <div class="todo-item" [class.completed]="todo.todo_status">
+        <div class="check-box" (click)="toggleCompleted(todo)">
+            <i class="material-icons">check</i>
+        </div>
+        <div class="todo-text">
+            {{todo.todo_title}}
+        </div>
+        <div class="todo-controls-box">
+            <div class="todo-control-button" (click)="onEditClicked(todo)">
+                <i class="material-icons">edit</i>
+            </div>
+            <div class="todo-control-button">
+                <i class="material-icons">note</i>
+            </div>
+            <div class="todo-control-button">
+                <i class="material-icons">face</i>
+            </div>
+            <div class="todo-control-button is-danger" (click)="onDeleteClicked(todo)">
+                <i class="material-icons">delete</i>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!todo">
+    No Record
+</div>
